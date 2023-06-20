@@ -1,4 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, SPINNER } from 'ngx-ui-loader'
 
 import { AppComponent } from './app.component';
 import { AppHeaderComponent } from './layouts/full/header/header.component';
@@ -15,6 +16,19 @@ import { MaterialModule } from './shared/material-module';
 import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { SignupComponent } from './signup/signup.component';
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  text: 'Loading...',
+  textColor:'#FFFFFF',
+  textPosition: 'center-center',
+  pbColor: 'red',
+  bgsColor: 'red',
+  fgsColor: 'red',
+  fgsType: SPINNER.ballSpinClockwise,
+  fgsSize: 100,
+  pbDirection: PB_DIRECTION.leftToRight,
+  pbThickness: 5
+}
 
 @NgModule({
   declarations: [
@@ -35,7 +49,8 @@ import { SignupComponent } from './signup/signup.component';
     ReactiveFormsModule,
     MaterialModule,
     FlexLayoutModule,
-    SharedModule
+    SharedModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
