@@ -10,7 +10,6 @@ export class UserService {
 
   url = environment.apiUrl;
 
-
   constructor(private httpClient: HttpClient) { }
 
   signup(data:any){

@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './shared/material-module';
 import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SharedModule } from './shared/shared.module';
     BestSellerComponent,
     FullComponent,
     AppHeaderComponent,
-    AppSidebarComponent
+    AppSidebarComponent,
+    SignupComponent
    ],
   imports: [
     BrowserModule,
