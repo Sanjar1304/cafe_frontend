@@ -10,7 +10,43 @@
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" required>
                 <mat-error *ngIf="name.touched && name.invalid">
-                    <span *ngIf="name.errors.required">This field is mandatory</span>
+                    <span *ngIf="name.errors.required">This field is mandatory.</span>
+                    <span *ngIf="name.errors.pattern">This field value is invalid.</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required>
+                <mat-error *ngIf="email.touched && email.invalid">
+                    <span *ngIf="email.errors.required">This field is mandatory.</span>
+                    <span *ngIf="email.errors.pattern">This field value is invalid.</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex>
+                <mat-label>Contact Number</mat-label>
+                <input matInput formControlName="contactNumber" required>
+                <mat-error *ngIf="contactNumber.touched && contactNumber.invalid">
+                    <span *ngIf="contactNumber.errors.required">This field is mandatory.</span>
+                    <span *ngIf="contactNumber.errors.pattern">This field value is invalid.</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex>
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" required>
+                <mat-error *ngIf="password.touched && password.invalid">
+                    <span *ngIf="password.errors.required">This field is mandatory.</span>
+                    <span *ngIf="password.errors.pattern">This field value is invalid.</span>
+                    <span *ngIf="password.errors.minlength">
+                      Password must be more than 5 and less than 10 digits.
+                      We need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} digits.
+                    </span>
+                    <span *ngIf="password.errors.maxlength">
+                      Password must be more than 5 and less than 10 digits.
+                      You wrote {{password.errors.maxlength.requiredLength - password.errors.maxlength.actualLength}} more digits.
+                    </span>
                 </mat-error>
             </mat-form-field>
         </div>
