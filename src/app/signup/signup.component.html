@@ -35,7 +35,7 @@
 
             <mat-form-field appearance="fill" fxFlex>
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password" required>
+                <input matInput formControlName="password" type="password" required>
                 <mat-error *ngIf="password.touched && password.invalid">
                     <span *ngIf="password.errors.required">This field is mandatory.</span>
                     <span *ngIf="password.errors.pattern">This field value is invalid.</span>
@@ -52,3 +52,7 @@
         </div>
     </form>
 </mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()" [disabled]="!(signupForm.valid && signupForm.dirty)">Signup</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>
