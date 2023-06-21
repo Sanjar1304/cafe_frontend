@@ -40,6 +40,22 @@ export class SignupComponent implements OnInit {
     })
   }
 
+  get name(){
+    return this.signupForm.get('name');
+  }
+
+  get email(){
+    return this.signupForm.get('email');
+  }
+
+  get contactNumber(){
+    return this.signupForm.get('contactNumber');
+  }
+
+  get password(){
+    return this.signupForm.get('password');
+  }
+
 
   handleSubmit(){
     this.ngxService.start();
