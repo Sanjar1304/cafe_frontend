@@ -24,6 +24,7 @@ export class ForgotPasswordComponent implements OnInit {
               private ngxService: NgxUiLoaderService){ }
 
   ngOnInit(): void {
+    this.forgotPasswordFormValidation();
   }
 
 
@@ -32,6 +33,10 @@ export class ForgotPasswordComponent implements OnInit {
     this.forgotPasswordForm = this.fb.group({
       email: [null, [Validators.required, Validators.pattern(GlobalConstants.emailRegex)]]
     })
+  }
+
+  get email(){
+    return this.forgotPasswordForm.get('email');
   }
 
   handleSubmit(){
