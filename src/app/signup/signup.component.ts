@@ -66,7 +66,6 @@ export class SignupComponent implements OnInit {
       contactNumber: formData.contactNumber,
       password: formData.password
     };
-    console.log(data)
     this.userService.signup(data).subscribe((response:any) => {
       this.ngxService.stop();
       this.dailogRef.close();
