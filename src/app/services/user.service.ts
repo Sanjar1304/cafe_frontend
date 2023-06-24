@@ -19,8 +19,15 @@ export class UserService {
   }
 
   forgotPassword(data: any){
-    return this.httpClient.post(this.url + '/user/forgotPassword/', data, {
+    return this.httpClient.post(`${this.url}/user/forgotPassword/`, data, {
       headers: new HttpHeaders().set('Content-Type', "application/json")
     });
+  }
+
+
+  login(data: any){
+    return this.httpClient.post(`${this.url}/user/signup/`, data, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    })
   }
 }
