@@ -9,7 +9,24 @@
             <mat-form-field appearance="fill" fxFlex>
                 <mat-label>Email</mat-label>
                 <input matInput formControlName="email" required>
+                <mat-error *ngIf="email.touched && email.invalid">
+                    <span *ngIf="email.errors.required">This field is mandatory.</span>
+                    <span *ngIf="email.errors.pattern">This field value is invalid.</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" fxFlex>
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" required>
+                <mat-error *ngIf="password.touched && password.invalid">
+                    <span *ngIf="password.errors.required">This field is mandatory.</span>
+                    <span *ngIf="password.errors.pattern">This field value is invalid.</span>
+                </mat-error>
             </mat-form-field>
         </div>
     </form>
 </mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()" [disabled]="!(loginForm.valid && loginForm.dirty)">Login</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>
