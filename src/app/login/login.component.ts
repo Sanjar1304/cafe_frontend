@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private userService: UserService,
               private snackbar: SnackbarService,
-              private dialogRef: MatDialogRef<LoginComponent>,
+              public dialogRef: MatDialogRef<LoginComponent>,
               private ngxService: NgxUiLoaderService) { }
 
   ngOnInit(): void {
@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
 
   loginFormValidation(){
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern(GlobalConstants.emailRegex)]],
-      password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]]
+      email: [null, [Validators.required, Validators.pattern(GlobalConstants.emailRegex)]],
+      password: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(15)]]
     })
   }
 
@@ -55,9 +55,8 @@ export class LoginComponent implements OnInit {
     this.userService.login(data).subscribe((response: any) => {
       this.ngxService.stop();
       this.dialogRef.close();
-      this.responseMessage = response?.message;
-      this.snackbar.openSnackBar(this.responseMessage, '');
-      this.router.navigate(['/login']);
+      localStorage.setItem('token', response.token);
+      this.router.navigate(['/cafe/dashboard']);
     }, (error) => {
       this.ngxService.stop();
       if(error.error?.message){
