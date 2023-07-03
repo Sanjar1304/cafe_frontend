@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
@@ -34,5 +34,12 @@ export class UserService {
 
   checkToken(){
     return this.httpClient.get(`${this.url}/user/checkToken`);
+  }
+
+
+  changePassword(data: any){
+    return this.httpClient.post(`${this.url}/user/changePassword`, data, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    })
   }
 }
