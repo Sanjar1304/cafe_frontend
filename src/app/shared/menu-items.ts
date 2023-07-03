@@ -12,9 +12,7 @@ const MENUITEMS = [
 ];
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MenuItems {
   getMenuItems(): Menu[] {
     return MENUITEMS
