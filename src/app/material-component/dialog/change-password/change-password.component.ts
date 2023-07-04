@@ -49,7 +49,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   validateSubmit(){
-   (this.changePasswordForm.controls['newPassword'].value != this.changePasswordForm.controls['confirmPassword'].value) ? true : false;
+    return (this.changePasswordForm.controls['newPassword'].value != this.changePasswordForm.controls['confirmPassword'].value) ? true : false;
   }
 
   handleChangePassword(){
