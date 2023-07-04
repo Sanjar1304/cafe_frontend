@@ -36,9 +36,11 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   validateSubmit(){
-    if(this.changePasswordForm.controls['newPassword'].value){
+   (this.changePasswordForm.controls['newPassword'].value != this.changePasswordForm.controls['confirmPassword'].value) ? true : false;
+  }
 
-    }
+  handleChangePassword(){
+
   }
 
 }
