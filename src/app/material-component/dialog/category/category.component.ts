@@ -45,7 +45,7 @@ export class CategoryComponent implements OnInit {
 
 
   get name(){
-    return this.categoryForm('name');
+    return this.categoryForm.get('name');
   }
 
 

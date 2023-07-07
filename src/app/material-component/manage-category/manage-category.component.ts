@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
+import { CategoryComponent } from '../dialog/category/category.component';
 import { CategoryService } from 'src/app/services/category.service';
 import { GlobalConstants } from 'src/app/shared/global-constant';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
@@ -52,9 +53,35 @@ export class ManageCategoryComponent implements OnInit {
   }
 
   handleAddAction(){
-
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      action: 'Add'
+    }
+    dialogConfig.width = '850px';
+    const dialogRef =  this.dialog.open(CategoryComponent, dialogConfig)
+    this.router.events.subscribe(() => {
+      dialogRef.close();
+    });
+    const sub = dialogRef.componentInstance.onAddCategory.subscribe((response: any) => {
+      this.tableData()
+    })
   }
 
-  handleEditAction(value:any){}
+
+  handleEditAction(values:any){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      action: 'Edit',
+      data: values
+    }
+    dialogConfig.width = '850px';
+    const dialogRef = this.dialog.open(CategoryComponent, dialogConfig);
+    this.router.events.subscribe(() => {
+     dialogRef.close();
+    })
+    const sub = dialogRef.componentInstance.onEditCategory.subscribe((response: any) => {
+      this.tableData();
+    })
+  }
 
 }
