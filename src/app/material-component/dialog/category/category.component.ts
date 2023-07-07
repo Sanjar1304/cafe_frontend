@@ -33,7 +33,7 @@ export class CategoryComponent implements OnInit {
 
   catergoryFormValidation(){
     this.categoryForm = this.fb.group({
-      name: [null, [Validators.required]]
+      name: [null, [Validators.required, Validators.pattern(GlobalConstants.nameRegex)]]
     })
 
     if(this.dialogData.action === 'Edit'){
@@ -41,6 +41,11 @@ export class CategoryComponent implements OnInit {
       this.action = 'Update';
       this.categoryForm.patchValue(this.dialogData.data)
     }
+  }
+
+
+  get name(){
+    return this.categoryForm('name');
   }
 
 
