@@ -53,4 +53,6 @@ export class ManageProductComponent implements OnInit {
 
   handleAddAction(){}
 
+  handleEditAction(value: any){}
+
 }
