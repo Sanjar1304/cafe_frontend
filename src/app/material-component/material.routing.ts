@@ -18,7 +18,7 @@ export const MaterialRoutes: Routes = [
     component: ManageProductComponent,
     canActivate: [RouteGuardService],
     data: {
-      expectedRole: ['']
+      expectedRole: ['admin']
     }
   }
 ];
