@@ -113,8 +113,27 @@ export class ProductComponent implements OnInit {
   edit(){
     let formData = this.productForm.value;
     let data = {
-
+      id: this.dialogData.data.id,
+      name: formData.name,
+      categoryId: formData.categoryId,
+      price: formData.price,
+      description: formData.description
     }
+
+    this.productService.updateProduct(data).subscribe((response:any) => {
+      this.dialogRef.close();
+      this.onEditProduct.emit();
+      this.responseMessage = response.message;
+      this.snackbar.openSnackBar(this.responseMessage, 'success');
+    }, (error) => {
+      this.dialogRef.close();
+      if(error.error?.message){
+        this.responseMessage = error.error?.message;
+      }else{
+        this.responseMessage = GlobalConstants.genericError;
+      }
+      this.snackbar.openSnackBar(this.responseMessage, GlobalConstants.error);
+    })
   }
 
 
