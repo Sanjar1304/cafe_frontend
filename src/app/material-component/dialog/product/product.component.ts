@@ -30,6 +30,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productFormValidation();
+    this.getCategories();
   }
 
   productFormValidation(){
@@ -43,7 +44,7 @@ export class ProductComponent implements OnInit {
     if(this.dialogData.action === 'Edit'){
       this.dialogAction = 'Edit';
       this.action = 'Update';
-      this.productForm.patchValue(this.dialogData.dat);
+      this.productForm.patchValue(this.dialogData.data);
     }
   }
 
@@ -64,14 +65,57 @@ export class ProductComponent implements OnInit {
   }
 
 
+  getCategories(){
+    this.categoryService.getCategory().subscribe((response: any) => {
+      this.categories = response;
+    }, (error) => {
+      if(error.error?.message){
+        this.responseMessage = error.error?.message;
+      }else{
+        this.responseMessage = GlobalConstants.genericError;
+      }
+      this.snackbar.openSnackBar(this.responseMessage, GlobalConstants.error);
+    })
+  }
+
+
   handleSubmit(){
     return this.dialogAction === 'Edit' ? this.edit() : this.add();
   }
 
 
-  add(){}
+  add(){
+    let formData = this.productForm.value;
+    let data = {
+      name: formData.name,
+      categoryId: formData.categoryId,
+      price: formData.price,
+      description: formData.description
+    }
 
-  edit(){}
+    this.productService.addProduct(data).subscribe((response: any) => {
+      this.dialogRef.close();
+      this.onAddProduct.emit();
+      this.responseMessage = response.message;
+      this.snackbar.openSnackBar(this.responseMessage, 'success');
+    }, (error) => {
+      this.dialogRef.close();
+      if(error.error?.message){
+        this.responseMessage = error.error?.message;
+      }else{
+        this.responseMessage = GlobalConstants.genericError;
+      }
+      this.snackbar.openSnackBar(this.responseMessage, GlobalConstants.error)
+    })
+  }
+
+
+  edit(){
+    let formData = this.productForm.value;
+    let data = {
+
+    }
+  }
 
 
 }
