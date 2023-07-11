@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GlobalConstants } from 'src/app/shared/global-constant';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { ProductComponent } from '../dialog/product/product.component';
 import { ProductService } from 'src/app/services/product.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from 'src/app/services/snackbar.service';
@@ -57,7 +58,13 @@ export class ManageProductComponent implements OnInit {
       action: 'Add'
     }
     dialogConfig.width = '850px';
-    // const dialogRef = this.dialog.open()
+    const dialogRef = this.dialog.open(ProductComponent, dialogConfig);
+    this.router.events.subscribe(() => {
+      dialogRef.close();
+    });
+    const sub = dialogRef.componentInstance.onAddProduct.subscribe((response:any) => {
+      this.tableData()
+    })
   }
 
   handleEditAction(value: any){}
