@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { GlobalConstants } from 'src/app/shared/global-constant';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ProductService } from 'src/app/services/product.service';
@@ -51,8 +51,19 @@ export class ManageProductComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  handleAddAction(){}
+  handleAddAction(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      action: 'Add'
+    }
+    dialogConfig.width = '850px';
+    // const dialogRef = this.dialog.open()
+  }
 
   handleEditAction(value: any){}
+
+  handleDeleteAction(){}
+
+  onChange(status: any, id: any){}
 
 }

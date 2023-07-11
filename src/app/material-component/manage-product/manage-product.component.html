@@ -38,10 +38,15 @@
                 <button mat-icon-button color="primary" matTooltip="Edit" (click)="handleEditAction(element)">
                   <mat-icon>edit</mat-icon>
                 </button>
+
+                <button mat-icon-button color="primary" matTooltip="Delete" (click)="handleDeleteAction()">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <mat-slide-toggle (change)="onChange($event.checked, element.id)" matTooltip="Activate or Deactivate Product" [checked]="element.status"></mat-slide-toggle>
             </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef=" displayedColumns; sticky:true "></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </div>
