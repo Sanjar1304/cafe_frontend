@@ -6,6 +6,7 @@
 <mat-dialog-content class="mat-typography">
     <form [formGroup]="productForm">
         <div fxFlex fxLayout="column">
+
             <div fxLayout="row wrap">
                 <mat-form-field appearance="fill" fxFlex>
                     <mat-label>Name</mat-label>
@@ -16,6 +17,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
+
             <div fxLayout="row wrap">
                 <mat-form-field appearance="fill" fxFlex>
                     <mat-label>Price</mat-label>
@@ -33,6 +35,17 @@
                         </mat-option>
                     </mat-select>
                     <mat-error></mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Description</mat-label>
+                    <input matInput formControlName="description" required>
+                    <mat-error *ngIf="description.touched && description.invalid">
+                        <span *ngIf="description.errors.required">This field is mandatory.</span>
+                        <span *ngIf="description.errors.pattern">This field value is invalid.</span>
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
