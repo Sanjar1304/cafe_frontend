@@ -75,7 +75,21 @@ export class ManageOrderComponent implements OnInit {
 
 
 
-
+  getProductsByCategory(value: any){
+    this.productService.getProductsByCategory(value.id).subscribe((response:any) => {
+      this.products = response;
+      this.manageOrderForm.controls['price'].setValue('');
+      this.manageOrderForm.controls['quantity'].setValue('');
+      this.manageOrderForm.controls['total'].setValue(0);
+    }, (error) => {
+      if(error.error?.message){
+        this.responseMessage = error.error?.message;
+      }else{
+        this.responseMessage = GlobalConstants.genericError;
+      }
+      this.snackBar.openSnackBar(this.responseMessage, GlobalConstants.error);
+    })
+  }
 
 
 
