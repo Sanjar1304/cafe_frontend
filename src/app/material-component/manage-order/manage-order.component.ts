@@ -37,7 +37,9 @@ export class ManageOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.ngxService.start();
+    this.getCategory();
     this.manageOrderFormValidation();
+
   }
 
 
@@ -56,7 +58,20 @@ export class ManageOrderComponent implements OnInit {
   }
 
 
-
+  getCategory(){
+    this.categoryService.getCategory().subscribe((response: any) => {
+      this.ngxService.stop();
+      this.categoryList = response;
+    }, (error) => {
+      this.ngxService.stop();
+      if(error.error?.message){
+        this.responseMessage = error.error?.message;
+      }else{
+        this.responseMessage = GlobalConstants.genericError;
+      }
+      this.snackBar.openSnackBar(this.responseMessage, GlobalConstants.error);
+    })
+  }
 
 
 
