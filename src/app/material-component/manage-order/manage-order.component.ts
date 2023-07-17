@@ -123,4 +123,47 @@ export class ManageOrderComponent implements OnInit {
   }
 
 
+  validateProductAdd(){
+    return this.manageOrderForm.controls['total'].value === 0 || this.manageOrderForm.controls['total'].value === null || this.manageOrderForm.controls['quantity'].value <= 0 ? true : false;
+  }
+
+
+
+  validateSubmitBtn(){
+    if(this.totalAmount === 0 ||
+      this.manageOrderForm.controls['name'].value === null ||
+      this.manageOrderForm.controls['email'].value === null ||
+      this.manageOrderForm.controls['contactNumber'].value === null ||
+      this.manageOrderForm.controls['paymentMethod'].value === null ||
+      !(this.manageOrderForm.controls['contactNumber'].valid) ||
+      !(this.manageOrderForm.controls['email'].valid)){
+        return true
+    }else {
+        return false
+    }
+  }
+
+
+  add(){
+    let formData = this.manageOrderForm.value;
+    let productName = this.dataSource.find((el: {id:number}) => el.id == formData.product.id);
+    if(productName === undefined){
+      this.totalAmount = this.totalAmount + formData.total;
+      this.dataSource.push({
+        id: formData.product.id,
+        name: formData.product.name,
+        category: formData.category.name,
+        quantity: formData.quantity,
+        price: formData.price,
+        total: formData.total
+      });
+      this.dataSource = [...this.dataSource];
+      this.snackBar.openSnackBar(GlobalConstants.productAdded, 'success');
+    }else{
+      this.snackBar.openSnackBar(GlobalConstants.productExistError, GlobalConstants.error)
+    }
+  }
+
+
+
 }
