@@ -82,6 +82,7 @@ export class ManageOrderComponent implements OnInit {
       this.manageOrderForm.controls['quantity'].setValue('');
       this.manageOrderForm.controls['total'].setValue(0);
     }, (error) => {
+      this.ngxService.stop();
       if(error.error?.message){
         this.responseMessage = error.error?.message;
       }else{
@@ -91,6 +92,35 @@ export class ManageOrderComponent implements OnInit {
     })
   }
 
+
+
+  getProductDetails(value: any){
+    this.productService.getByID(value).subscribe((response: any) => {
+      this.price = response.price;
+      this.manageOrderForm.controls['price'].setValue(response.price);
+      this.manageOrderForm.controls['quantity'].setValue('1');
+      this.manageOrderForm.controls['total'].setValue(this.price * 1);
+    }, (error: any) => {
+      this.ngxService.stop();
+      if(error.error?.message){
+        this.responseMessage = error.error?.message;
+      }else {
+        this.responseMessage = GlobalConstants.genericError;
+      }
+      this.snackBar.openSnackBar(this.responseMessage, GlobalConstants.error)
+    })
+  }
+
+
+  setQuantity(value: any){
+    let temp = this.manageOrderForm.controls['quantity'].value;
+    if(temp > 0){
+      this.manageOrderForm.controls['total'].setValue(this.manageOrderForm.controls['quantity'].value * this.manageOrderForm.controls['price'].value);
+    }else if(temp != ''){
+      this.manageOrderForm.controls['quantity'].setValue('1');
+      this.manageOrderForm.controls['total'].setValue(this.manageOrderForm.controls['quantity'].value * this.manageOrderForm.controls['price'].value);
+    }
+  }
 
 
 }
