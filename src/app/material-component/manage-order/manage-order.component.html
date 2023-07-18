@@ -1,1 +1,18 @@
-
+<mat-card>
+    <b><span>Manage Order</span></b>
+    <button mat-flat-button color="primary" class="float-right" [disabled]="validateSubmitBtn()" (click)="submitAction()">Submit & Get Bill</button>
+</mat-card>
+<hr>
+<mat-card>
+    <b><span>Customer Details: </span></b>
+    <form [formGroup]="manageOrderForm">
+        <div fxFlex fxLayout="column">
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="fill" fxFlex>
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-card>
