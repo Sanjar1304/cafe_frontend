@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ProductService } from 'src/app/services/product.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-manage-order',
@@ -162,6 +163,55 @@ export class ManageOrderComponent implements OnInit {
     }else{
       this.snackBar.openSnackBar(GlobalConstants.productExistError, GlobalConstants.error)
     }
+  }
+
+
+  handleDeleteAction(value: any, element: any){
+    this.totalAmount = this.totalAmount - element.total;
+    this.dataSource.splice(value, 1);
+    this.dataSource = [...this.dataSource];
+  }
+
+
+
+  submitAction(){
+    this.ngxService.start();
+    let formData = this.manageOrderForm.value;
+    var data = {
+      name: formData.name,
+      email: formData.email,
+      contactNumber: formData.contactNumber,
+      paymentMethod: formData.paymentMethod,
+      totalAmount: this.totalAmount,
+      productDetails: JSON.stringify(this.dataSource)
+    };
+
+    this.billService.generateReport(data).subscribe((response:any) => {
+      this.downloadFile(response?.uuid);
+      this.manageOrderForm.reset();
+      this.dataSource = [];
+      this.totalAmount = 0;
+    }, (error:any) => {
+      this.ngxService.stop();
+      if(error.error?.message){
+        this.responseMessage = error.error?.message;
+      }else{
+        this.responseMessage = GlobalConstants.genericError;
+      }
+      this.snackBar.openSnackBar(this.responseMessage, GlobalConstants.error)
+    })
+  }
+
+
+
+  downloadFile(fileName: any){
+    let data = {
+      uuid: fileName
+    };
+    this.billService.getPdfReport(data).subscribe((response: any) => {
+      saveAs(response, fileName + '.pdf');
+      this.ngxService.stop();
+    })
   }
 
 
