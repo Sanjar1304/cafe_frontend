@@ -56,7 +56,45 @@ export class ManageOrderComponent implements OnInit {
       price: [null, [Validators.required]],
       total: [0, [Validators.required]],
     })
+  };
+
+
+  get name(){
+    return this.manageOrderForm.get('name')
   }
+
+  get email(){
+    return this.manageOrderForm.get('email')
+  }
+
+  get contactNumber(){
+    return this.manageOrderForm.get('contactNumber')
+  }
+
+  get paymentMethod(){
+    return this.manageOrderForm.get('paymentMethod')
+  }
+
+  get product(){
+    return this.manageOrderForm.get('product')
+  }
+
+  get category(){
+    return this.manageOrderForm.get('category')
+  }
+
+  get quantity(){
+    return this.manageOrderForm.get('quantity')
+  }
+
+  get priceForm(){
+    return this.manageOrderForm.get('price')
+  }
+
+  get total(){
+    return this.manageOrderForm.get('total')
+  }
+
 
 
   getCategory(){
@@ -114,7 +152,7 @@ export class ManageOrderComponent implements OnInit {
 
 
   setQuantity(value: any){
-    let temp = this.manageOrderForm.controls['quantity'].value;
+    var temp = this.manageOrderForm.controls['quantity'].value;
     if(temp > 0){
       this.manageOrderForm.controls['total'].setValue(this.manageOrderForm.controls['quantity'].value * this.manageOrderForm.controls['price'].value);
     }else if(temp != ''){
@@ -146,8 +184,8 @@ export class ManageOrderComponent implements OnInit {
 
 
   add(){
-    let formData = this.manageOrderForm.value;
-    let productName = this.dataSource.find((el: {id:number}) => el.id == formData.product.id);
+    var formData = this.manageOrderForm.value;
+    var productName = this.dataSource.find((el: {id:number}) => el.id == formData.product.id);
     if(productName === undefined){
       this.totalAmount = this.totalAmount + formData.total;
       this.dataSource.push({
@@ -176,7 +214,7 @@ export class ManageOrderComponent implements OnInit {
 
   submitAction(){
     this.ngxService.start();
-    let formData = this.manageOrderForm.value;
+    var formData = this.manageOrderForm.value;
     var data = {
       name: formData.name,
       email: formData.email,
@@ -205,7 +243,7 @@ export class ManageOrderComponent implements OnInit {
 
 
   downloadFile(fileName: any){
-    let data = {
+    var data = {
       uuid: fileName
     };
     this.billService.getPdfReport(data).subscribe((response: any) => {
