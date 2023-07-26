@@ -4,8 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BillService } from 'src/app/services/bill.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { GlobalConstants } from 'src/app/shared/global-constant';
-import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ProductService } from 'src/app/services/product.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
@@ -32,7 +30,6 @@ export class ManageOrderComponent implements OnInit {
               private categoryService: CategoryService,
               private productService: ProductService,
               private snackBar: SnackbarService,
-              private dialog: MatDialog,
               private fb: FormBuilder) { }
 
 
@@ -101,7 +98,7 @@ export class ManageOrderComponent implements OnInit {
     this.categoryService.getCategory().subscribe((response: any) => {
       this.ngxService.stop();
       this.categoryList = response;
-    }, (error) => {
+    }, (error: any) => {
       this.ngxService.stop();
       if(error.error?.message){
         this.responseMessage = error.error?.message;
@@ -134,7 +131,7 @@ export class ManageOrderComponent implements OnInit {
 
 
   getProductDetails(value: any){
-    this.productService.getByID(value).subscribe((response: any) => {
+    this.productService.getByID(value.id).subscribe((response: any) => {
       this.price = response.price;
       this.manageOrderForm.controls['price'].setValue(response.price);
       this.manageOrderForm.controls['quantity'].setValue('1');
