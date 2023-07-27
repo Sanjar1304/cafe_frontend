@@ -68,6 +68,11 @@ export class ViewBillComponent implements OnInit {
   }
 
 
+  handleDeleteAction(){}
+
+
+  downloadReportAction(){}
+
 
 
 }
