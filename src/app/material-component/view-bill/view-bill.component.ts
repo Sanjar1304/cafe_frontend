@@ -58,7 +58,7 @@ export class ViewBillComponent implements OnInit {
   handleViewAction(values: any){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
-      action: 'View'
+      data:values
     }
     dialogConfig.width = '100%';
     const dialogRef = this.dialog.open(ViewBillProductsComponent, dialogConfig);
@@ -70,7 +70,7 @@ export class ViewBillComponent implements OnInit {
 
   handleDeleteAction(value: any){}
 
- 
+
   downloadReportAction(value: any){}
 
 

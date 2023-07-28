@@ -19,6 +19,5 @@ export class ViewBillProductsComponent implements OnInit {
     this.data = this.dialogData.data;
     this.dataSource = JSON.parse(this.dialogData.data.productDetails);
   }
-
   
 }
