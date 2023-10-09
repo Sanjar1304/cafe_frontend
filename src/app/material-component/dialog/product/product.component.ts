@@ -1,4 +1,4 @@
-import { Component, EventEmitter,Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter,Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoryService } from 'src/app/services/category.service';
@@ -9,7 +9,8 @@ import { GlobalConstants } from 'src/app/shared/global-constant';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  styleUrls: ['./product.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductComponent implements OnInit {
 

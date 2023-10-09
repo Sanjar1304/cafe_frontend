@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { CategoryComponent } from '../dialog/category/category.component';
@@ -12,7 +12,8 @@ import { SnackbarService } from 'src/app/services/snackbar.service';
 @Component({
   selector: 'app-manage-category',
   templateUrl: './manage-category.component.html',
-  styleUrls: ['./manage-category.component.scss']
+  styleUrls: ['./manage-category.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ManageCategoryComponent implements OnInit {
 

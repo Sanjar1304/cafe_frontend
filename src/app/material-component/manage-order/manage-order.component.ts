@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { BillService } from 'src/app/services/bill.service';
@@ -12,7 +12,8 @@ import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-manage-order',
   templateUrl: './manage-order.component.html',
-  styleUrls: ['./manage-order.component.scss']
+  styleUrls: ['./manage-order.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ManageOrderComponent implements OnInit {
 

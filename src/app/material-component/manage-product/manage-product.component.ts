@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { ConfirmationComponent } from '../dialog/confirmation/confirmation.component';
@@ -13,7 +13,8 @@ import { SnackbarService } from 'src/app/services/snackbar.service';
 @Component({
   selector: 'app-manage-product',
   templateUrl: './manage-product.component.html',
-  styleUrls: ['./manage-product.component.scss']
+  styleUrls: ['./manage-product.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ManageProductComponent implements OnInit {
 
@@ -142,6 +143,6 @@ export class ManageProductComponent implements OnInit {
     })
   }
 
-  
+
 
 }
